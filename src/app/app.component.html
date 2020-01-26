@@ -1,0 +1,25 @@
+<a href="https://coryrylan.com/blog/building-reusable-forms-in-angular"><h1>Building Reusable Forms in Angular</h1></a>
+
+<form [formGroup]="signupForm" (ngSubmit)="submit()">
+  <app-profile-form formControlName="profile"></app-profile-form>
+  <app-password-form formControlName="password"></app-password-form>
+  
+  <label for="inputField">Input field</label>
+  <input formControlName="inputField" id="inputField" />
+  <div *ngIf="signupForm.get('inputField').touched && signupForm.get('inputField').hasError('required')" class="error">
+      This input field is required
+  </div>
+  <div *ngIf="signupForm.get('inputField').invalid" class="error">
+    This input field is invalid
+  </div>
+  <div>
+  <mat-form-field>
+    <input matInput placeholder="Please enter smething here" type="text" formControlName="matInputControl">
+    <mat-error *ngIf="signupForm.get('matInputControl').invalid">{{getErrorMessage()}}</mat-error>
+  </mat-form-field>
+</div>
+<div>
+  <button>Sign Up</button>
+  <button type="button" (click)="resetForm()">Reset</button>
+</div>
+</form>
